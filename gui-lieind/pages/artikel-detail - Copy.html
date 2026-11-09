@@ -1,0 +1,14 @@
+<article>
+  <h2>{{ @artikel.judul }}</h2>
+  <p><small>Ditulis oleh {{ @artikel.penulis }} pada {{ @artikel.tanggal_dibuat }}</small></p>
+
+  <check if="{{ @artikel.gambar }}">
+    <img src="{{ @pathfolder }}/public/images/{{ @artikel.gambar }}" alt="{{ @artikel.judul }}" style="max-width:100%;">
+  </check>
+
+  <div>
+    {{ @artikel.isi }}
+  </div>
+
+  <p><a href="{{ @pathfolder }}/artikel">? Kembali ke daftar artikel</a></p>
+</article>

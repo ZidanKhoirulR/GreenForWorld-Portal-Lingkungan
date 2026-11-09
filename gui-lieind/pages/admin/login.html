@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Admin</title>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4EA685;
+      --secondary: #57B894;
+      --white: #fff;
+      --gray: #efefef;
+      --gray-2: #757575;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: linear-gradient(rgba(78, 166, 133, 0.6),
+          rgba(87, 184, 148, 0.6)),
+        url("https://static.independent.co.uk/2025/04/10/09/03095146-be664927-f9db-4f45-9ece-695d94682798.jpg?quality=75&width=1368&crop=3%3A2%2Csmart&auto=webp");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      overflow: hidden;
+    }
+
+    .container {
+      position: relative;
+      width: 400px;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(8px);
+      border-radius: 1rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+      padding: 2rem 2.5rem;
+      text-align: center;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h2 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .input-group {
+      position: relative;
+      margin: 1rem 0;
+    }
+
+    .input-group i {
+      position: absolute;
+      top: 50%;
+      left: 1rem;
+      transform: translateY(-50%);
+      color: var(--gray-2);
+      font-size: 1.2rem;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 0.8rem 1rem 0.8rem 2.8rem;
+      border: 1px solid var(--gray);
+      border-radius: 0.5rem;
+      background: var(--gray);
+      font-size: 1rem;
+      transition: border 0.3s;
+    }
+
+    input:focus {
+      border-color: var(--primary);
+      outline: none;
+      background: #f9f9f9;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 1.2rem;
+      padding: 0.8rem 0;
+      border: none;
+      border-radius: 0.5rem;
+      background-color: var(--primary);
+      color: var(--white);
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: var(--secondary);
+    }
+
+    p.error {
+      color: red;
+      font-size: 0.9rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .footer {
+      margin-top: 1.5rem;
+      color: var(--gray-2);
+      font-size: 0.8rem;
+    }
+
+    .footer span {
+      font-weight: bold;
+      color: var(--primary);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h2>Login Admin</h2>
+    <check if="{{ @error }}">
+  <true>
+    <p class="error">{{ @error }}</p>
+  </true>
+</check>
+
+
+    <form method="post" action="{{ @pathfolder }}/admin/login">
+      <div class="input-group">
+        <i class='bx bxs-user'></i>
+        <input type="text" name="username" placeholder="Username" required />
+      </div>
+
+      <div class="input-group">
+        <i class='bx bxs-lock-alt'></i>
+        <input type="password" name="password" placeholder="Password" required />
+      </div>
+
+      <input type="hidden" name="csrf" value="{{ @SESSION.csrf }}" />
+
+      <button type="submit">Login</button>
+      
+    </form>
+
+    <div class="footer">
+      <p>© 2025 <span>Green for World</span> - Admin Panel</p>
+    </div>
+  </div>
+
+</body>
+
+</html>

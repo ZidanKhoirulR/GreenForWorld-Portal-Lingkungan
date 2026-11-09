@@ -1,0 +1,24 @@
+
+<h2>Tambah Foto Galeri</h2>
+<check if="{{ @error }}">
+  <p style="color:red">{{ @error }}</p>
+</check>
+
+<form method="POST" enctype="multipart/form-data">
+  <label>Judul:</label><br>
+  <input type="text" name="judul" required><br>
+
+  <label>Deskripsi:</label><br>
+  <textarea name="deskripsi"></textarea><br>
+
+  <label>Kategori:</label><br>
+  <input type="text" name="kategori"><br>
+
+  <label>Tanggal:</label><br>
+  <input type="date" name="tanggal"><br>
+
+  <label>Gambar:</label><br>
+  <input type="file" name="gambar" accept="image/*" required><br><br>
+
+  <button type="submit">Upload</button>
+</form>

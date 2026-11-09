@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Footer Gradient Example</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<style>
+		/*.site-footer {*/
+		/*	background: linear-gradient(135deg, #227417, #21a9af);*/
+		/*	background-color: #188e36;*/
+			/* fallback */
+		/*	padding: 45px 0 20px;*/
+		/*	font-size: 15px;*/
+		/*	line-height: 24px;*/
+		/*	font-family: 'Source Sans Pro', sans-serif;*/
+		/*	color: #f0f0f0;*/
+		/*}*/
+		
+		
+		.site-footer {
+    background:
+        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+        url("https://images.unsplash.com/photo-1583470790878-4f4f3811a01f?q=80&w=1176&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    padding: 45px 0 20px;
+    font-size: 15px;
+    line-height: 24px;
+    font-family: 'Source Sans Pro', sans-serif;
+    color: #f0f0f0;
+}
+
+		
+		
+
+		.site-footer hr {
+			border-top-color: #bbb;
+			opacity: 0.5;
+		}
+
+		.site-footer h6 {
+			color: #fff;
+			font-size: 16px;
+			text-transform: uppercase;
+			margin-top: 5px;
+			letter-spacing: 2px;
+		}
+
+		.site-footer a {
+			color: #d0f0d0;
+		}
+
+		.site-footer a:hover {
+			color: #b2dfdb;
+			text-decoration: none;
+		}
+
+		.footer-links {
+			padding-left: 0;
+			list-style: none;
+		}
+
+		.footer-links li {
+			display: block;
+		}
+
+		.footer-links a {
+			color: #d0f0d0;
+		}
+
+		.footer-links a:hover {
+			color: #b2dfdb;
+			text-decoration: none;
+		}
+
+		.site-footer .social-icons {
+			text-align: right;
+		}
+
+		.site-footer .social-icons a {
+			width: 40px;
+			height: 40px;
+			line-height: 40px;
+			margin-left: 6px;
+			border-radius: 100%;
+			background-color: #33353d;
+			color: #fff;
+		}
+
+		.copyright-text {
+			margin: 0;
+		}
+
+		@media (max-width:991px) {
+			.site-footer [class^=col-] {
+				margin-bottom: 30px;
+			}
+		}
+
+		@media (max-width:767px) {
+			.site-footer {
+				padding-bottom: 0;
+			}
+
+			.site-footer .copyright-text,
+			.site-footer .social-icons {
+				text-align: center;
+			}
+		}
+
+		.social-icons {
+			padding-left: 0;
+			margin-bottom: 0;
+			list-style: none;
+		}
+
+		.social-icons li {
+			display: inline-block;
+			margin-bottom: 4px;
+		}
+
+		.social-icons a {
+			background-color: #eceeef;
+			color: #227417;
+			font-size: 16px;
+			display: inline-block;
+			line-height: 44px;
+			width: 44px;
+			height: 44px;
+			text-align: center;
+			margin-right: 8px;
+			border-radius: 100%;
+			transition: all .2s linear;
+		}
+
+		.social-icons a:hover {
+			color: #fff;
+			background-color: #21a9af;
+		}
+
+		.social-icons a.facebook:hover {
+			background-color: #3b5998;
+		}
+
+		.social-icons a.twitter:hover {
+			background-color: #00aced;
+		}
+
+		.social-icons a.linkedin:hover {
+			background-color: #007bb6;
+		}
+
+		.social-icons a.dribbble:hover {
+			background-color: #ea4c89;
+		}
+
+		body {
+			margin: 0;
+			padding: 0;
+		}
+
+		.site-footer {
+			margin-top: 0;
+			/* pastikan tidak ada jarak ekstra di atas footer */
+		}
+	</style>
+</head>
+
+<body>
+
+	<!-- Site footer -->
+	<footer class="site-footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 col-md-6">
+					<h6>About</h6>
+					<p class="text-justify">
+						We are here to raise awareness of the <i>importance of protecting our planet</i> through
+						concrete actions and
+						sustainable education. By highlighting current environmental issues, we are committed to
+						inspiring communities
+						to care more about nature, from waste reduction to the conservation of natural resources.
+						Together, we can build
+						collective awareness and create a greener, cleaner, and more sustainable future for generations
+						to come.
+					</p>
+
+				</div>
+
+				<div class="col-xs-6 col-md-3">
+					<h6>Category</h6>
+					<ul class="footer-links">
+						<li><a href="#">Climate & Environment</a></li>
+						<li><a href="#">Sustainable Living</a></li>
+						<li><a href="#">Renewable Energy</a></li>
+						<li><a href="#">Green Technology & Innovation</a></li>
+						<li><a href="#">Youth & Community Action
+</a></li>
+						<li><a href="#">Education & Awareness</a></li>
+					</ul>
+				</div>
+
+				<div class="col-xs-6 col-md-3">
+					<h6>Quick Links</h6>
+					<ul class="footer-links">
+						<li><a href="/article">Article</a></li>
+						<li><a href="/news">News</a></li>
+						<li><a href="/campaign">Campaign</a></li>
+						<li><a href="/gallery">Gallery</a></li>
+						<li><a href="/about-us">About Us</a></li>
+						<li><a href="/contact">Contact</a></li>
+					</ul>
+				</div>
+			</div>
+			<hr>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-sm-6 col-xs-12">
+					<p class="copyright-text">
+						Copyright &copy; 2025 All Rights Reserved by
+						<a href="#">Greenforworld</a>.
+					</p>
+				</div>
+
+				<div class="col-md-4 col-sm-6 col-xs-12">
+					<!--<ul class="social-icons">-->
+					<!--	<li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>-->
+					<!--	<li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>-->
+					<!--	<li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>-->
+					<!--	<li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>-->
+					<!--</ul>-->
+				</div>
+			</div>
+		</div>
+	</footer>
+
+</body>
+
+</html>

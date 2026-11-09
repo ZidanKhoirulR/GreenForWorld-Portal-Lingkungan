@@ -1,0 +1,9 @@
+<form action="/fatfree-core-master37/update-user/{{ @user.id }}" method="POST">
+    <label>Nama:</label>
+    <input type="text" name="name" value="{{ @user.name }}" required><br>
+
+    <label>Email:</label>
+    <input type="email" name="email" value="{{ @user.email }}" required><br>
+
+    <button type="submit">Simpan Perubahan</button>
+</form>

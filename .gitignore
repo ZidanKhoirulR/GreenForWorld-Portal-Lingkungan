@@ -1,0 +1,39 @@
+# Composer & Dependencies
+/vendor/
+node_modules/
+
+# Fat-Free Framework Temp / Cache Directory
+/tmp/
+
+# Screenshots Directory
+/screenshots/
+
+# Root junction links (created for local web server path resolution)
+/css/
+/js/
+/images/
+
+# Database Dumps
+*.sql
+
+# Local Configuration & Secrets (Prevent credential exposure)
+config.local.php
+.env
+update_password.php
+
+# Logs & Cache
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE & Editor files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# OS Generated Files
+.DS_Store
+Thumbs.db
+desktop.ini

@@ -1,0 +1,27 @@
+<h2>Daftar Foto Galeri</h2>
+
+<a href="/admin/galeri/add">+ Tambah Foto Baru</a>
+<table border="1" cellpadding="8" cellspacing="0">
+  <tr>
+    <th>Gambar</th>
+    <th>Judul</th>
+    <th>Kategori</th>
+    <th>Tanggal</th>
+    <th>Aksi</th>
+  </tr>
+  <repeat group="{{ @galeri }}" value="{{ @item }}">
+    <tr>
+      <td><img src="/uploads/{{ @item.gambar }}" width="100"></td>
+      <td>{{ @item.judul }}</td>
+      <td>{{ @item.kategori }}</td>
+      <td>{{ @item.tanggal }}</td>
+      <td>
+        <a href="/admin/galeri/edit/{{ @item.id }}">Edit</a> |
+        <form method="POST" action="/admin/galeri/hapus" style="display:inline">
+          <input type="hidden" name="id" value="{{ @item.id }}">
+          <button type="submit" onclick="return confirm('Yakin hapus?')">Hapus</button>
+        </form>
+      </td>
+    </tr>
+  </repeat>
+</table>

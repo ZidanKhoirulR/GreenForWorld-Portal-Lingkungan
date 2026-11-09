@@ -1,0 +1,18 @@
+<table border="1">
+    <tr><th>ID</th><th>Nama</th><th>Email</th></tr>
+    <repeat group="{{ @usersX }}" value="{{ @user }}">
+    <tr>
+        <td>{{ @user.id }}</td>
+        <td>{{ @user.name }}</td>
+        <td>{{ @user.email }}</td>
+        <!-- <td><a href="/fatfree-core-master37/delete/{{ @user.id }}" onclick="return confirm('Hapus pengguna ini?');">? Hapus</a></td> -->        
+        <td>
+            <form method="POST" action="/fatfree-core-master37/delete/{{ @user.id }}" onsubmit="return confirm('Hapus pengguna ini?');" style="display:inline;">
+                <input type="hidden" name="csrf" value="{{ @CSRF }}">
+                <button type="submit">?? Hapus</button>
+            </form>
+        </td>
+
+    </tr>
+</repeat>
+</table>

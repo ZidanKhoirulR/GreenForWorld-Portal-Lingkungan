@@ -1,0 +1,12 @@
+<h2>Artikel Lingkungan</h2>
+
+<ul>
+  <repeat group="{{ @artikelList }}" value="{{ @artikel }}">
+    <li>
+      <h3><a href="{{ @pathfolder }}/artikel/{{ @artikel.slug }}">{{ @artikel.judul }}</a></h3>
+      <p><small>Ditulis oleh {{ @artikel.penulis }} pada {{ @artikel.tanggal_dibuat }}</small></p>
+      <p>{{ @artikel.preview }}...</p>
+      <a href="{{ @pathfolder }}/artikel/{{ @artikel.slug }}">Baca Selengkapnya</a>
+    </li>
+  </repeat>
+</ul>

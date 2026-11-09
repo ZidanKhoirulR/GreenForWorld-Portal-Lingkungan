@@ -1,0 +1,153 @@
+<div class="main-content-container container-fluid px-4">
+    <!-- Page Header -->
+    <div class="page-header row no-gutters py-4">
+        <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+            <h3 class="page-title">Daftar Foto Galeri</h3>
+            <h6 class="page-title">
+                <small>(Total: {{ @total_galeri }} Foto)</small>
+            </h6>
+        </div>
+    </div>
+    <!-- End Page Header -->
+    <!-- Default Light Table -->
+    <div class="row">
+        <div class="col">
+            <div class="card card-small mb-4">
+
+                <div class="card-body p-0 pb-3 text-center">
+
+                    <a href="gallery/add-new-post-gallery" class="btn btn-success pull-right">
+                      <i class="fa fa-plus"></i> &nbsp;Tambah Foto
+                    </a><br><br>
+                    <table class="table mb-0">
+                        <thead class="bg-light">
+                            <tr>
+                                <th>Gambar</th>
+                                <th>Judul</th>
+                                <th>Kategori</th>
+                                <th>Tanggal</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <repeat group="{{ @galeri_list }}" value="{{ @item }}">
+                                    <tr>
+                                      <td><img src="{{@BASE}}/uploads/gallery/{{ @item.gambar }}" width="100"></td>
+                                      <td>{{ @item.judul }}</td>
+                                      <td>{{ @item.kategori }}</td>
+                                      <td>{{ @item.tanggal }}</td>
+                                      <td>
+                                        <a href="{{@BASE}}/admin/gallery/edit/{{ @item.id }}">Edit</a> |
+                                        
+                                        <button class="btn btn-sm btn-danger" onclick="showDeleteModal_Galeri({{ @item.id }})">Hapus</button>
+                                      </td>
+                                    </tr>
+                                  </repeat>
+                        </tbody>
+                    </table>
+                    <div class="mt-3">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center">
+                                <check if="{{ @current_page > 1 }}">
+                                    <li class="page-item">
+                                        <a class="page-link"
+                                            href="{{@BASE}}/admin/gallery?page={{ @current_page - 1 }}">Sebelumnya</a>
+                                    </li>
+                                    <li class="page-item">&nbsp;&nbsp;&nbsp;</li>
+                                </check>
+
+                                <repeat group="{{ range(1,@total_pages) }}" value="{{ @p }}">
+                                    <li class="page-item {{ @p == @current_page ? 'active' : '' }}">
+                                        <a class="page-link" href="{{@BASE}}/admin/gallery?page={{ @p }}">{{ @p }}</a>
+                                    </li>
+                                </repeat>
+                                
+                                
+
+                                <check if="{{ @current_page < @total_pages }}">
+                                    <li class="page-item">&nbsp;&nbsp;&nbsp;</li>
+                                    
+                                    <li class="page-item">
+                                            <a class="page-link" href="{{@BASE}}/admin/gallery?page={{ @current_page + 1 }}">Berikutnya</a>
+                                    </li>
+                                </check>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Default Light Table -->
+</div>
+
+<!-- Modal Konfirmasi Hapus -->
+<div class="modal fade" id="deleteModal_Galeri" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <form id="deleteForm_Galeri" method="post" action="{{@pathfolder}}/admin/gallery/hapus">
+        <div class="modal-header bg-danger text-white">
+          <h5 class="modal-title">Konfirmasi Hapus Galeri</h5>
+          <button type="button" class="close text-white" data-dismiss="modal">
+            <span>&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Yakin ingin menghapus galeri ini?</p>
+          <p>Masukkan hasil dari: <strong id="captchaQuestion"></strong></p>
+          <input type="number" class="form-control" name="captcha_answer" required>
+          <input type="hidden" name="captcha_result" id="captchaResult">
+          <input type="hidden" name="id" id="deleteId">
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-danger">Hapus</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Gagal Verifikasi -->
+<div class="modal fade" id="errorModal_Galeri" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-warning text-white">
+        <h5 class="modal-title" id="errorModalLabel">Verifikasi Gagal</h5>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Jawaban kamu salah. galeri tidak dihapus.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Coba Lagi</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function showDeleteModal_Galeri(id) {
+    const a = Math.floor(Math.random() * 10);
+    const b = Math.floor(Math.random() * 10);
+    const result = a + b;
+
+    document.getElementById('captchaQuestion').textContent = `${a} + ${b} = ?`;
+    document.getElementById('captchaResult').value = result;
+    document.getElementById('deleteId').value = id;
+
+    $('#deleteModal_Galeri').modal('show');
+  }
+
+  document.getElementById('deleteForm_Galeri').addEventListener('submit', function (e) {
+  const userAnswer = parseInt(this.captcha_answer.value);
+  const correctAnswer = parseInt(this.captcha_result.value);
+
+  if (userAnswer !== correctAnswer) {
+    e.preventDefault();
+    $('#errorModal_Galeri').modal('show'); // tampilkan modal gagal
+  }
+});
+</script>

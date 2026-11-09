@@ -1,0 +1,17 @@
+<h2>Hasil Pencarian: "{{ @keyword }}"</h2>
+
+<check if="{{ @results }}">
+	<true>
+		<ul>
+			<repeat group="{{ @results }}" value="{{ @row }}">
+				<li>
+					<h4>{{ @row.judul }}</h4>
+					<p>{{ substr(@row.isi, 0, 150) }}...</p>
+				</li>
+			</repeat>
+		</ul>
+	</true>
+	<false>
+		<p>Tidak ada hasil ditemukan.</p>
+	</false>
+</check>

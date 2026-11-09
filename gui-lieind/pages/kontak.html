@@ -1,0 +1,307 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<title>GREEN FOR WORLD</title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<link href='http://fonts.googleapis.com/css?family=Arimo:400,700' rel='stylesheet' type='text/css'>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="{{ @pathfolder }}/gui-lieind/js/skel.min.js"></script>
+	<script src="{{ @pathfolder }}/gui-lieind/js/skel-panels.min.js"></script>
+	<script src="{{ @pathfolder }}/gui-lieind/js/init.js"></script>
+
+	<link rel="stylesheet" href="{{ @pathfolder }}/gui-lieind/css/skel-noscript.css" />
+	<link rel="stylesheet" href="{{ @pathfolder }}/gui-lieind/css/style.css" />
+	<link rel="stylesheet" href="{{ @pathfolder }}/gui-lieind/css/style-desktop.css" />
+
+	<style>
+		/* ── Toast Notification ── */
+		#contact-toast {
+			position: fixed !important;
+			top: 28px !important;
+			right: 28px !important;
+			z-index: 99999 !important;
+			min-width: 320px;
+			max-width: 420px;
+			padding: 18px 22px 18px 20px;
+			border-radius: 12px;
+			box-shadow: 0 8px 32px rgba(0,0,0,.25);
+			display: none;
+			align-items: flex-start;
+			gap: 14px;
+			font-family: 'Arimo', Arial, sans-serif;
+			font-size: 14.5px;
+			line-height: 1.55;
+			background: #fff;
+		}
+		#contact-toast.show {
+			display: flex !important;
+			animation: toastIn .35s ease forwards;
+		}
+		#contact-toast.success {
+			border-left: 5px solid #2e7d32;
+			color: #1b5e20;
+		}
+		#contact-toast.error {
+			border-left: 5px solid #c62828;
+			color: #b71c1c;
+		}
+		@keyframes toastIn {
+			from { opacity: 0; transform: translateX(60px); }
+			to   { opacity: 1; transform: translateX(0);   }
+		}
+		#contact-toast .toast-icon {
+			font-size: 26px;
+			line-height: 1;
+			flex-shrink: 0;
+			margin-top: 1px;
+		}
+		#contact-toast .toast-body strong {
+			display: block;
+			font-size: 15.5px;
+			margin-bottom: 3px;
+		}
+		#contact-toast .toast-close {
+			margin-left: auto;
+			background: none;
+			border: none;
+			cursor: pointer;
+			font-size: 18px;
+			color: #888;
+			padding: 0;
+			line-height: 1;
+			flex-shrink: 0;
+		}
+
+		/* ── Button loading state ── */
+		#btn-send {
+			position: relative;
+			min-width: 140px;
+			transition: opacity .2s;
+		}
+		#btn-send.loading {
+			opacity: .75;
+			pointer-events: none;
+		}
+		#btn-send .btn-spinner {
+			display: none;
+			width: 16px;
+			height: 16px;
+			border: 2px solid rgba(255,255,255,.45);
+			border-top-color: #fff;
+			border-radius: 50%;
+			animation: spin .7s linear infinite;
+			vertical-align: middle;
+			margin-right: 7px;
+		}
+		#btn-send.loading .btn-spinner { display: inline-block; }
+		@keyframes spin { to { transform: rotate(360deg); } }
+
+		/* ── Form focus style ── */
+		.form-control:focus {
+			border-color: #2e7d32 !important;
+			box-shadow: 0 0 0 3px rgba(46,125,50,.15) !important;
+			outline: none;
+		}
+	</style>
+</head>
+
+<body>
+
+	<!-- Header -->
+	<include href="gui-lieind/i_header.html" />
+
+	<!-- Toast -->
+	<div id="contact-toast" role="alert">
+		<span class="toast-icon" id="toast-icon"></span>
+		<div class="toast-body">
+			<strong id="toast-title"></strong>
+			<span id="toast-msg"></span>
+		</div>
+		<button class="toast-close" onclick="hideToast()" title="Tutup">&times;</button>
+	</div>
+
+	<div id="main">
+		<div class="container">
+			<div class="row">
+
+				<!-- FORM + MAP -->
+			<section class="py-5">
+	<div class="container">
+		<div class="row align-items-start">
+
+			<!-- FORM -->
+			<div class="col-lg-6 col-md-12">
+				<div class="col-lg-10 mx-auto">
+					<h2 class="display-5 fw-bold">Contact Us</h2>
+					<p class="lead">
+						Get in touch with us for more information, collaboration opportunities, or any
+						questions regarding
+						<span style="font-weight:bold; color:green;">GreW's</span>
+						environmental mission.
+					</p>
+
+					<form id="contact-form" method="POST" action="#" novalidate>
+						<div class="row">
+
+							<div class="col-md-12">
+								<div class="mb-3">
+									<input type="text" name="nama" id="inp-nama" class="form-control bg-light"
+										placeholder="Your Name" required>
+								</div>
+							</div>
+
+							<div class="col-md-12">
+								<div class="mb-3">
+									<input type="email" name="email" id="inp-email" class="form-control bg-light"
+										placeholder="Your E-mail" required>
+								</div>
+							</div>
+
+							<div class="col-md-12">
+								<div class="mb-3">
+									<textarea name="pesan" id="inp-pesan" class="form-control bg-light"
+										placeholder="Your Message" rows="4" required></textarea>
+								</div>
+							</div>
+
+							<div class="col-md-5">
+								<div class="d-grid">
+									<button class="btn btn-success" type="submit" id="btn-send">
+										<span class="btn-spinner"></span>
+										<span class="btn-label">Send Message</span>
+									</button>
+								</div>
+							</div>
+
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<!-- MAP -->
+			<div class="col-lg-6 col-md-12">
+				<iframe
+					src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d253497.1393726255!2d107.47834459527094!3d-6.903421164625082!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e6398252477f%3A0x146a1f93d3e815b2!2sBandung%2C%20Bandung%20City%2C%20West%20Java!5e0!3m2!1sen!2sid!4v1766371329847!5m2!1sen!2sid"
+					width="100%"
+					height="400"
+					style="border:0;"
+					loading="lazy"
+					referrerpolicy="no-referrer-when-downgrade">
+				</iframe>
+			</div>
+
+		</div>
+	</div>
+</section>
+
+			</div> <!-- end row -->
+		</div> <!-- end container -->
+	</div> <!-- end main -->
+
+	<!-- Footer -->
+	<include href="gui-lieind/i_footer.html" />
+
+	<script>
+	/* ============================================================
+	   Contact Form – AJAX Submit
+	   Deteksi URL otomatis: bekerja di localhost & production
+	   ============================================================ */
+	var toastTimer = null;
+
+	/* Bangun URL endpoint dari current path:
+	   localhost/greenforworld/contact  →  /greenforworld/contact/send
+	   greenforworld.com/contact        →  /contact/send               */
+	var _contactSendUrl = (function() {
+		var p = window.location.pathname;           // mis. "/greenforworld/contact"
+		p = p.replace(/\/+$/, '');                  // hapus trailing slash
+		p = p.replace(/\/contact$/, '');            // hapus "/contact" di akhir
+		return p + '/contact/send';                 // tambahkan endpoint
+	})();
+
+	function showToast(type, title, msg) {
+		var $t = document.getElementById('contact-toast');
+		$t.className = 'show ' + type;
+		document.getElementById('toast-icon').textContent = (type === 'success') ? '✅' : '❌';
+		document.getElementById('toast-title').textContent = title;
+		document.getElementById('toast-msg').textContent   = msg;
+		clearTimeout(toastTimer);
+		toastTimer = setTimeout(hideToast, 6000);
+	}
+
+	function hideToast() {
+		document.getElementById('contact-toast').className = '';
+	}
+
+	$(document).ready(function() {
+		$('#contact-form').on('submit', function (e) {
+			e.preventDefault();
+
+			var $form    = $(this);
+			var formData = $form.serialize();
+
+			var nama  = $.trim($('#inp-nama').val());
+			var email = $.trim($('#inp-email').val());
+			var pesan = $.trim($('#inp-pesan').val());
+
+			// Validasi sisi klien
+			if (!nama || !email || !pesan) {
+				showToast('error', 'Field Kosong', 'Mohon lengkapi semua field sebelum mengirim.');
+				return;
+			}
+			var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+			if (!emailRegex.test(email)) {
+				showToast('error', 'Email Tidak Valid', 'Masukkan alamat email yang benar.');
+				return;
+			}
+
+			// Loading state
+			var $btn = $('#btn-send');
+			$btn.addClass('loading');
+			$('.btn-label').text('Mengirim...');
+
+			$.ajax({
+				url:      _contactSendUrl,
+				type:     'POST',
+				data:     formData,
+				dataType: 'json',
+				timeout:  30000,
+				success: function (res) {
+					if (res && res.success) {
+						showToast('success', 'Pesan Terkirim!', res.message);
+						$form[0].reset();
+					} else {
+						var errMsg = (res && res.message) ? res.message : 'Terjadi kesalahan. Coba lagi.';
+						showToast('error', 'Gagal Mengirim', errMsg);
+					}
+				},
+				error: function (xhr, status, err) {
+					var msg = 'Tidak dapat terhubung ke server.';
+					if (status === 'timeout') {
+						msg = 'Koneksi timeout (>30 detik). Coba lagi.';
+					} else if (xhr.responseText) {
+						try {
+							var parsed = JSON.parse(xhr.responseText);
+							msg = parsed.message || msg;
+						} catch(ex) {
+							console.error('[Contact] URL:', _contactSendUrl);
+							console.error('[Contact] HTTP:', xhr.status, status);
+							console.error('[Contact] Response:', xhr.responseText.substring(0, 500));
+						}
+					}
+					showToast('error', 'Gagal!', msg);
+				},
+				complete: function () {
+					$btn.removeClass('loading');
+					$('.btn-label').text('Send Message');
+				}
+			});
+		});
+	});
+	</script>
+
+</body>
+
+</html>

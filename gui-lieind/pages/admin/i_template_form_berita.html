@@ -1,0 +1,155 @@
+<!-- Page Header -->
+<div class="page-header row no-gutters py-4">
+  <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+    <span class="text-uppercase page-subtitle">Blog Posts</span>
+    <h3 class="page-title">Tambah Berita Baru</h3>
+  </div>
+
+  <check if="{{ @error }}">
+    <div class="alert alert-danger">{{ @error }}</div>
+  </check>
+</div>
+<!-- End Page Header -->
+
+<form id="form-berita" method="post" action="{{ @BASE }}/admin/berita/add-new-post-berita">
+  <div class="row">
+    <div class="col-lg-9 col-md-12">
+      <!-- Add New Post Form -->
+      <div class="card card-small mb-3">
+        <div class="card-body">
+
+          <input 
+            class="form-control form-control-lg mb-3" 
+            type="text" 
+            name="judul" 
+            placeholder="Judul Berita" 
+            value="{{ @judul }}">
+
+          <textarea
+            name="isi"
+            id="editor"
+            class="form-control form-control-lg mb-3"
+            rows="20"
+            placeholder="Isi Berita">{{ @isi }}</textarea>
+
+          <!-- CSRF -->
+          <input type="hidden" name="csrf" value="{{ @CSRF }}">
+
+        </div>
+      </div>
+      <!-- / Add New Post Form -->
+    </div>
+
+    <div class="col-lg-3 col-md-12">
+      <!-- Post Overview -->
+      <div class='card card-small mb-3'>
+        <div class="card-header border-bottom">
+          <h6 class="m-0">Actions</h6>
+        </div>
+        <div class='card-body p-0'>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item p-3">
+              <span class="d-flex mb-2">
+                <i class="material-icons mr-1">flag</i>
+                <strong class="mr-1">Status:</strong> Draft
+              </span>
+            </li>
+            <li class="list-group-item d-flex px-3">
+              <button type="submit" name="status" value="0" class="btn btn-sm btn-outline-accent">
+                <i class="material-icons">save</i> Save Draft
+              </button>
+
+              <button type="submit" name="status" value="1" class="btn btn-sm btn-accent ml-auto">
+                <i class="material-icons">file_copy</i> Publish
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- / Post Overview -->
+    </div>
+  </div>
+</form>
+
+<!-- Modal Notifikasi -->
+<div class="modal fade" id="notifModal" tabindex="-1" role="dialog" aria-labelledby="notifModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-warning text-white">
+        <h5 class="modal-title" id="notifModalLabel">Peringatan</h5>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Judul dan isi berita tidak boleh kosong.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Tutup</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CKEditor -->
+<script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
+
+<script>
+let editorInstance;
+
+document.addEventListener('DOMContentLoaded', function () {
+  ClassicEditor
+    .create(document.querySelector('#editor'), {
+      toolbar: {
+        items: [
+          'heading',
+          '|',
+          'bold',
+          'italic',
+          'underline',
+          '|',
+          'alignment',
+          'bulletedList',
+          'numberedList',
+          '|',
+          'insertImage',
+          'blockQuote',
+          'undo',
+          'redo'
+        ]
+      }
+    })
+    .then(editor => {
+      editorInstance = editor;
+      console.log('CKEditor aktif');
+    })
+    .catch(error => {
+      console.error('CKEditor error:', error);
+    });
+});
+</script>
+
+<script>
+document.getElementById('form-berita').addEventListener('submit', function (e) {
+  const judul = document.querySelector('[name="judul"]').value.trim();
+  const isi = editorInstance.getData().trim();
+
+  let errorMessage = '';
+
+  if (judul === '' || isi === '') {
+    errorMessage = 'Judul dan isi berita tidak boleh kosong.';
+  } else if (judul.length < 10 || isi.length < 200) {
+    errorMessage = 'Judul minimal 10 karakter dan isi minimal 200 karakter.';
+  }
+
+  if (errorMessage !== '') {
+    e.preventDefault();
+    document.querySelector('#notifModal .modal-body').textContent = errorMessage;
+    $('#notifModal').modal('show');
+    return;
+  }
+
+  // Sinkronkan CKEditor ke textarea
+  document.querySelector('[name="isi"]').value = isi;
+});
+</script>

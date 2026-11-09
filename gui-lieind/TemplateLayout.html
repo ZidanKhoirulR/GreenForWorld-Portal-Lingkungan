@@ -1,0 +1,215 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<title>GREEN FOR WORLD</title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<link href='http://fonts.googleapis.com/css?family=Arimo:400,700' rel='stylesheet' type='text/css'>
+	<!--[if lte IE 8]><script src="{{@BASE}}/{{@GUI}}js/html5shiv.js"></script><![endif]-->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="/gui-lieind/js/skel.min.js"></script>
+	<script src="/gui-lieind/js/skel-panels.min.js"></script>
+	<script src="/gui-lieind/js/init.js"></script>
+
+	<link rel="stylesheet" href="/gui-lieind/css/skel-noscript.css" />
+	<link rel="stylesheet" href="/gui-lieind/css/style.css" />
+	<link rel="stylesheet" href="/gui-lieind/css/style-desktop.css" />
+
+	<!--[if lte IE 8]><link rel="stylesheet" href="/website_lies/gui-lieind/css/ie/v8.css" /><![endif]-->
+	<!--[if lte IE 9]><link rel="stylesheet" href="/website_lies/gui-lieind/css/ie/v9.css" /><![endif]-->
+	
+	
+	<style>
+	    /* === Sidebar Latest Posts === */
+#sidebar ul.style {
+	border: none;
+}
+
+/* Item list */
+#sidebar ul.style li {
+	overflow: hidden; /* clear float */
+	padding-bottom: 12px;
+	margin-bottom: 12px;
+}
+
+/* Garis hanya di antara item (bukan terakhir) */
+#sidebar ul.style li:not(:last-child) {
+	border-bottom: 1px solid #e0e0e0;
+}
+
+/* Matikan SEMUA garis bawaan template */
+#sidebar ul.style li,
+#sidebar ul.style li + li,
+#sidebar ul.style li:before,
+#sidebar ul.style li:after {
+	border-top: none !important;
+}
+
+/* Thumbnail */
+#sidebar ul.style li img {
+	float: left;
+	margin-right: 12px;
+	margin-bottom: 6px;
+	width: 70px;
+	height: 70px;
+	object-fit: cover;
+	border-radius: 4px;
+}
+
+/* Tanggal & komentar */
+#sidebar ul.style li .posted {
+	font-size: 12px;
+	color: #999;
+	margin-bottom: 6px;
+}
+
+/* Judul */
+#sidebar ul.style li .text {
+	line-height: 1.4em;
+}
+
+/* Link judul (hijau) */
+#sidebar ul.style li .text a {
+	color: #28a745;
+	text-decoration: none;
+	font-weight: 600;
+}
+
+#sidebar ul.style li .text a:hover {
+	color: #1e7e34;
+	text-decoration: underline;
+}
+
+	</style>
+	
+	
+	
+</head>
+
+<body>
+
+	<!-- Header -->
+	<include href="gui-lieind/i_header.html" />
+
+	<!-- Main -->
+	<div id="main">
+		<div class="container">
+			<div class="row">
+
+				<!-- Content -->
+				<div id="content" class="8u skel-cell-important">
+					<section>
+						<header>
+							<h2>
+                              <span style="text-transform: uppercase;">Welcome to</span>
+                              <span style="color: green; text-transform: none;">GreW</span>
+                            </h2>
+
+
+							<!-- <span class="byline">{{ @_SUB_TITLE_ }}</span> -->
+						</header>
+						<a href="#" class="image full"><img src="/gui-lieind/images/gfw2.png"
+								alt="" /></a>
+						<p style="text-align: justify;">The website “GreW” presents a curated collection of articles, news updates, and visual media dedicated to advancing the vision of a green and sustainable world. We are dedicated to amplifying the importance of protecting our planet through concrete actions and continuous education. By addressing pressing environmental issues, we are committed to inspiring greater public awareness and responsibility toward nature—from reducing waste to conserving natural resources. Together, we can foster collective consciousness and create a greener, cleaner, and more sustainable future for generations to come.</p>
+					</section>
+				</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar" class="4u">
+	<section>
+		<header>
+			<h2>Latest Posts</h2>
+		</header>
+
+		<ul class="style">
+		<repeat group="{{ @artikelSidebar }}" value="{{ @artikel }}">
+
+
+				<li>
+					<p class="posted">
+						{{ date('F d, Y', strtotime(@artikel.tanggal_diperbarui)) }}
+						| ({{ @artikel.jumlah_komentar }}) Comments
+					</p>
+
+					<a href="/artikel/{{ @artikel.slug }}">
+						<img
+							src="/gui-lieind/images/{{ @artikel.gambar }}"
+							alt="{{ @artikel.judul }}"
+							width="70"
+							height="70" />
+					</a>
+
+					<p class="text">
+						<a href="/artikel/{{ @artikel.slug }}">
+							{{ @artikel.judul }}
+						</a>
+					</p>
+				</li>
+			</repeat>
+		</ul>
+	</section>
+</div>
+
+
+
+
+			</div>
+		</div>
+	</div>
+
+	<!-- featured -->
+	<!-- featured -->
+<div id="featured">
+	<div class="container">
+
+		<!-- BARIS ATAS -->
+		<div class="row">
+			<repeat group="{{ @artikelFeatured }}" value="{{ @artikel }}" limit="3" offset="3">
+
+
+				<div class="4u">
+					<h2>{{ @artikel.judul }}</h2>
+
+					<a href="#" class="image full">
+						<img src="/gui-lieind/images/{{ @artikel.gambar }}"
+							 alt="{{ @artikel.judul }}" />
+					</a>
+
+					<p>
+						<small>
+							Written by {{ @artikel.penulis }} on {{ @artikel.tanggal_diperbarui }}
+						</small>
+					</p>
+
+					<p style="text-align: justify;">
+						{{ @artikel.preview | raw }}...
+					</p>
+
+					<p>
+						<a href="/artikel/{{ @artikel.slug }}" class="button"
+						   style="background-color:#28a745;color:white;padding:10px 15px;border-radius:5px;">
+							Read More
+						</a>
+					</p>
+				</div>
+
+			</repeat>
+		</div>
+
+
+		<!-- BARIS BAWAH -->
+		
+
+	</div>
+</div>
+
+
+
+	<!-- Footer -->
+	<include href="gui-lieind/i_footer.html" />
+
+</body>
+
+</html>
